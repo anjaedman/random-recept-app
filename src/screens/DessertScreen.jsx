@@ -1,4 +1,9 @@
 import { useState } from "react";
+import {
+  ingredientTranslations,
+  convertMeasure,
+  translateInstructions,
+} from "../utils/translations";
 
 function Dessert() {
   const [meal, setMeal] = useState(null);
@@ -28,9 +33,9 @@ function Dessert() {
       <button onClick={fetchRandomDessert}>Förslag på en Dessert</button>
 
       {meal && (
-        <div style={{ marginTop: "2rem" }}>
+        <div className="meal-container">
           <h2>{meal.strMeal}</h2>
-          <img src={meal.strMealThumb} width="300" />
+          <img src={meal.strMealThumb} width="300" alt={meal.strMeal} />
           <h3>Ingredienser</h3>
           <ul>
             {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => {
@@ -38,15 +43,14 @@ function Dessert() {
               const measure = meal[`strMeasure${i}`];
               return ingredient ? (
                 <li key={i}>
-                  {ingredient} - {measure}
+                  {ingredientTranslations[ingredient] || ingredient} -{" "}
+                  {convertMeasure(measure)}
                 </li>
               ) : null;
             })}
           </ul>
           <h3>Instruktioner</h3>
-          <p style={{ maxWidth: "600px", margin: "auto" }}>
-            {meal.strInstructions}
-          </p>
+          <p>{translateInstructions(meal.strInstructions)}</p>
         </div>
       )}
     </div>

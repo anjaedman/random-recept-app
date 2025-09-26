@@ -40,3 +40,32 @@
 .read-the-docs {
   color: #888;
 }
+
+.meal-container {
+  max-width: 90%;
+  margin: 2rem auto;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.meal-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.meal-container img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.meal-container ul {
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+.meal-container p {
+  white-space: pre-line; /* radbrytningar */
+  margin-top: 1rem;
+}
