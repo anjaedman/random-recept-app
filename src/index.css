@@ -1,0 +1,87 @@
+/* Grundstil för hela appen */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #2c2a27; /* mörk varm bakgrund */
+  color: #f5e6d3; /* ljus varm text */
+  text-align: center;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #3a3632; /* lite ljusare mörk ton */
+  border-bottom: 2px solid #e67e22;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #f5e6d3;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background: #e67e22;
+  color: #fff;
+}
+
+/* Knappar */
+button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #e67e22;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #d35400;
+}
+
+/* Bilder */
+img {
+  border-radius: 12px;
+  margin-top: 1rem;
+  max-width: 90%;
+  height: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Ingredienslistan */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #3a3632;
+  margin: 4px auto;
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: 400px;
+  text-align: left;
+  color: #f5e6d3;
+  border-left: 4px solid #e67e22;
+}
+
+/* Instruktionstext */
+p {
+  line-height: 1.6;
+  background: #3a3632;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: 1rem auto;
+  color: #f5e6d3;
+}
