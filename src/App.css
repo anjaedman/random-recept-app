@@ -1,8 +1,8 @@
-/* Bas */
+/* ================== BAS ================== */
 :root {
   --bg: #262a27;
   --card: #2f3330;
-  --accent: #ef7f34; /* din orange */
+  --accent: #ef7f34;
   --text: #f1e9df;
   --muted: #b9b2a9;
   --border: #5a4a34;
@@ -12,26 +12,31 @@ html,
 body,
 #root {
   height: 100%;
+  margin: 0;
   background: var(--bg);
   color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-/* ---------- NAVBAR ---------- */
+/* ================== NAVBAR ================== */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #1f2321;
+  background: #3b3732; /* lite ljusare så länkar syns bättre */
   border-bottom: 2px solid var(--accent);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
 .navbar-inner {
   display: flex;
-  gap: 0.5rem;
-  overflow-x: auto; /* gör den horisontellt scrollbar på mobil */
-  scrollbar-width: none;
+  flex-wrap: nowrap; /* <-- tvinga EN rad */
+  gap: 0.35rem; /* kompakt mellanrum */
+  overflow-x: auto; /* scroll i sidled vid behov */
   -ms-overflow-style: none;
-  padding: 0.5rem 0.75rem;
+  scrollbar-width: none;
+  padding: 0.35rem 0.5rem; /* tunn topp/botten */
 }
 .navbar-inner::-webkit-scrollbar {
   display: none;
@@ -39,15 +44,16 @@ body,
 
 .nav-link {
   flex: 0 0 auto;
-  display: inline-block;
-  padding: 0.5rem 0.8rem;
+  padding: 0.35rem 0.6rem; /* lägre höjd */
+  font-size: 0.95rem;
+  line-height: 1.1;
   font-weight: 600;
   text-decoration: none;
   color: var(--text);
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 0.6rem;
-  white-space: nowrap;
+  border-radius: 0.5rem;
+  white-space: nowrap; /* håll varje knapp på en rad */
 }
 .nav-link:hover {
   border-color: var(--accent);
@@ -57,36 +63,37 @@ body,
   color: #1a120a;
 }
 
-/* ---------- HERO / KNAPP ---------- */
-.hero {
-  text-align: center;
-  padding: 1.25rem 0.75rem 0;
-}
-.hero h1 {
-  font-weight: 800;
-  line-height: 1.15;
-  margin: 0.25rem auto 1rem;
-  /* Skalar snyggt från mobil till desktop */
-  font-size: clamp(1.25rem, 2.5vw + 1rem, 2.2rem);
-}
-.btn-primary {
-  display: inline-block;
-  padding: 0.65rem 1rem;
-  border-radius: 0.7rem;
-  border: 2px solid var(--accent);
-  background: var(--accent);
-  color: #1a120a;
-  font-weight: 700;
-}
-
-/* ---------- CONTENT ---------- */
+/* ================== LAYOUT/CONTENT ================== */
 .page {
-  max-width: 720px; /* hindrar jättebred text på stora skärmar */
+  max-width: 720px; /* hindrar jättebred text */
   margin: 0 auto;
   padding: 0 0.9rem 2.5rem;
 }
 
-/* Kort/huvud-innehåll */
+/* ================== HERO / KNAPP ================== */
+.hero {
+  text-align: center;
+  padding: 1rem 0.75rem 0.25rem;
+}
+.hero h1 {
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0.25rem auto 0.8rem;
+  /* mer modest i mobil */
+  font-size: clamp(1.1rem, 1.4rem + 1.2vw, 2rem);
+}
+.btn-primary {
+  display: inline-block;
+  padding: 0.55rem 0.9rem; /* tunnare knapp */
+  border-radius: 0.6rem;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #1a120a;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ================== KORT / MAT-INNEHÅLL ================== */
 .meal-container {
   margin: 1rem auto 0;
   background: var(--card);
@@ -94,6 +101,7 @@ body,
   border-radius: 12px;
   padding: 1rem 0.9rem 1.25rem;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  text-align: left;
 }
 
 .meal-container h2 {
@@ -109,7 +117,7 @@ body,
   border-radius: 10px;
 }
 
-/* Ingredienslista – mobilvänlig */
+/* ================== INGREDIENSER ================== */
 .ingredients {
   margin-top: 0.5rem;
 }
@@ -117,8 +125,9 @@ body,
   margin: 0.25rem 0 0.5rem;
   font-size: clamp(1rem, 1.5vw + 0.9rem, 1.35rem);
 }
+
 .ingredients ul {
-  list-style: none;
+  list-style: none; /* inga punkter här */
   padding: 0;
   margin: 0;
   display: grid;
@@ -132,19 +141,30 @@ body,
   padding: 0.55rem 0.65rem;
   line-height: 1.45;
   display: flex;
+  align-items: flex-start;
   gap: 0.5rem;
   justify-content: space-between;
 }
 .ingredients .ing-name {
   font-weight: 600;
+  min-width: 0; /* tillåt brytning */
+  word-break: break-word; /* långa ord bryts */
 }
 .ingredients .ing-measure {
   color: var(--muted);
   margin-left: 0.75rem;
   flex-shrink: 0;
+  white-space: nowrap; /* håll måttet på en rad */
 }
 
-/* Instruktioner */
+/* två kolumner på större skärmar */
+@media (min-width: 800px) {
+  .ingredients ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ================== INSTRUKTIONER ================== */
 .instructions h3 {
   margin: 1rem 0 0.5rem;
   font-size: clamp(1rem, 1.5vw + 0.9rem, 1.35rem);
@@ -158,10 +178,10 @@ body,
   padding: 0.9rem;
 }
 
-/* Små finjusteringar på riktigt små mobiler */
+/* ================== SMÅ MOBILER ================== */
 @media (max-width: 380px) {
   .nav-link {
-    padding: 0.45rem 0.6rem;
+    padding: 0.3rem 0.5rem;
     font-size: 0.9rem;
   }
   .ingredients li {
@@ -169,61 +189,33 @@ body,
   }
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ================== RENS: ta bort Vite-demo-stilar ================== */
+/* (de gav stor padding och centrerade all text) */
+.logo,
+.card,
+.read-the-docs {
+  display: none;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 @keyframes logo-spin {
   from {
-    transform: rotate(0deg);
+    transform: none;
   }
   to {
-    transform: rotate(360deg);
+    transform: none;
   }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Nollställ ev. gamla regler som låg kvar */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
 }
-
-@media (min-width: 800px) {
-  .ingredients ul {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
+/* Håll generella listor inne i .meal-container snygga om du använder dem */
 .meal-container ul {
-  padding-left: 1.2rem;
-  list-style: disc;
+  list-style: none;
+  padding-left: 0;
 }
-
 .meal-container p {
-  white-space: pre-line; /* radbrytningar */
   margin-top: 1rem;
 }
