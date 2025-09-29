@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from "react"; // <-- lägg till denna rad
+import "./App.css";
+
 import {
   BrowserRouter as Router,
   Routes,
