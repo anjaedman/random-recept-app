@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"; // <-- lägg till denna rad
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 import {
@@ -30,7 +30,7 @@ function Nav() {
     </Link>
   );
 
-  // Kolla om raden är bredare än skärmen → visa pilar + gradient
+  // Kolla om raden är bredare än skärmen → visa kontroller/gradient
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -53,7 +53,7 @@ function Nav() {
         block: "nearest",
       });
     } else {
-      el.scrollLeft = 0; // fallback
+      el.scrollLeft = 0;
     }
   }, [pathname]);
 
@@ -64,8 +64,20 @@ function Nav() {
 
   return (
     <nav className={`navbar ${hasOverflow ? "has-scroll" : ""}`}>
+      <div className="navbar-inner" ref={ref}>
+        {link("/", "Hem")}
+        {link("/beef", "Kött")}
+        {link("/chicken", "Kyckling")}
+        {link("/dessert", "Dessert")}
+        {link("/vegan", "Vegansk")}
+        {link("/vegeterian", "Vegetarisk")}
+        {link("/pasta", "Pasta")}
+        {link("/pork", "Fläskkött")}
+        {link("/lamb", "Lamm")}
+      </div>
+
       {hasOverflow && (
-        <>
+        <div className="navbar-controls">
           <button
             className="nav-scroll left"
             aria-label="Scrolla vänster"
@@ -80,19 +92,8 @@ function Nav() {
           >
             ›
           </button>
-        </>
+        </div>
       )}
-      <div className="navbar-inner" ref={ref}>
-        {link("/", "Hem")}
-        {link("/beef", "Kött")}
-        {link("/chicken", "Kyckling")}
-        {link("/dessert", "Dessert")}
-        {link("/vegan", "Vegansk")}
-        {link("/vegeterian", "Vegetarisk")}
-        {link("/pasta", "Pasta")}
-        {link("/pork", "Fläskkött")}
-        {link("/lamb", "Lamm")}
-      </div>
     </nav>
   );
 }
