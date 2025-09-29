@@ -1,3 +1,174 @@
+/* Bas */
+:root {
+  --bg: #262a27;
+  --card: #2f3330;
+  --accent: #ef7f34; /* din orange */
+  --text: #f1e9df;
+  --muted: #b9b2a9;
+  --border: #5a4a34;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #1f2321;
+  border-bottom: 2px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.navbar-inner {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto; /* gör den horisontellt scrollbar på mobil */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0.5rem 0.75rem;
+}
+.navbar-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.6rem;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  border-color: var(--accent);
+}
+.nav-link.active {
+  background: var(--accent);
+  color: #1a120a;
+}
+
+/* ---------- HERO / KNAPP ---------- */
+.hero {
+  text-align: center;
+  padding: 1.25rem 0.75rem 0;
+}
+.hero h1 {
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0.25rem auto 1rem;
+  /* Skalar snyggt från mobil till desktop */
+  font-size: clamp(1.25rem, 2.5vw + 1rem, 2.2rem);
+}
+.btn-primary {
+  display: inline-block;
+  padding: 0.65rem 1rem;
+  border-radius: 0.7rem;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #1a120a;
+  font-weight: 700;
+}
+
+/* ---------- CONTENT ---------- */
+.page {
+  max-width: 720px; /* hindrar jättebred text på stora skärmar */
+  margin: 0 auto;
+  padding: 0 0.9rem 2.5rem;
+}
+
+/* Kort/huvud-innehåll */
+.meal-container {
+  margin: 1rem auto 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 0.9rem 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.meal-container h2 {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+  font-size: clamp(1.25rem, 2.2vw + 1rem, 2rem);
+}
+.meal-container img {
+  display: block;
+  width: min(360px, 90%);
+  max-width: 100%;
+  margin: 0.5rem auto 1rem;
+  border-radius: 10px;
+}
+
+/* Ingredienslista – mobilvänlig */
+.ingredients {
+  margin-top: 0.5rem;
+}
+.ingredients h3 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(1rem, 1.5vw + 0.9rem, 1.35rem);
+}
+.ingredients ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.ingredients li {
+  background: #3a3f3a;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.65rem;
+  line-height: 1.45;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.ingredients .ing-name {
+  font-weight: 600;
+}
+.ingredients .ing-measure {
+  color: var(--muted);
+  margin-left: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Instruktioner */
+.instructions h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: clamp(1rem, 1.5vw + 0.9rem, 1.35rem);
+}
+.instructions p {
+  white-space: pre-line;
+  line-height: 1.6;
+  background: #333733;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.9rem;
+}
+
+/* Små finjusteringar på riktigt små mobiler */
+@media (max-width: 380px) {
+  .nav-link {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.9rem;
+  }
+  .ingredients li {
+    padding: 0.5rem 0.55rem;
+  }
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -33,31 +204,18 @@
   }
 }
 
+@media (min-width: 800px) {
+  .ingredients ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
-}
-
-.meal-container {
-  max-width: 90%;
-  margin: 2rem auto;
-  text-align: left;
-  line-height: 1.6;
-}
-
-.meal-container h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.meal-container img {
-  display: block;
-  margin: 1rem auto;
-  max-width: 100%;
-  border-radius: 8px;
 }
 
 .meal-container ul {
