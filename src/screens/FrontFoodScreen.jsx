@@ -9,11 +9,15 @@ function FrontFood() {
   const [meal, setMeal] = useState(null);
 
   const fetchRandomMeal = async () => {
-    const res = await fetch(
-      "https://www.themealdb.com/api/json/v1/1/random.php"
-    );
-    const data = await res.json();
-    setMeal(data.meals[0]);
+    try {
+      const res = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/random.php"
+      );
+      const data = await res.json();
+      setMeal(data.meals[0]);
+    } catch (err) {
+      console.error("Error fetching meal:", err);
+    }
   };
 
   return (
@@ -58,4 +62,5 @@ function FrontFood() {
     </>
   );
 }
+
 export default FrontFood;
