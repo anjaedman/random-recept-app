@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from "react";
 import "./App.css";
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,50 +19,15 @@ import Lamb from "./screens/LambScreen";
 
 function Nav() {
   const { pathname } = useLocation();
-  const ref = useRef(null);
-  const [hasOverflow, setHasOverflow] = useState(false);
-
   const link = (to, label) => (
     <Link className={`nav-link ${pathname === to ? "active" : ""}`} to={to}>
       {label}
     </Link>
   );
 
-  // Kolla om raden är bredare än skärmen → visa kontroller/gradient
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const check = () => setHasOverflow(el.scrollWidth > el.clientWidth);
-    check();
-    const ro = new ResizeObserver(check);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  // När route ändras: scrolla den aktiva länken i fokus
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const active = el.querySelector(".nav-link.active");
-    if (active) {
-      active.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    } else {
-      el.scrollLeft = 0;
-    }
-  }, [pathname]);
-
-  const scrollBy = (dx) => {
-    const el = ref.current;
-    if (el) el.scrollBy({ left: dx, behavior: "smooth" });
-  };
-
   return (
-    <nav className={`navbar ${hasOverflow ? "has-scroll" : ""}`}>
-      <div className="navbar-inner" ref={ref}>
+    <nav className="navbar">
+      <div className="navbar-inner two-rows">
         {link("/", "Hem")}
         {link("/beef", "Kött")}
         {link("/chicken", "Kyckling")}
@@ -75,25 +38,6 @@ function Nav() {
         {link("/pork", "Fläskkött")}
         {link("/lamb", "Lamm")}
       </div>
-
-      {hasOverflow && (
-        <div className="navbar-controls">
-          <button
-            className="nav-scroll left"
-            aria-label="Scrolla vänster"
-            onClick={() => scrollBy(-180)}
-          >
-            ‹
-          </button>
-          <button
-            className="nav-scroll right"
-            aria-label="Scrolla höger"
-            onClick={() => scrollBy(180)}
-          >
-            ›
-          </button>
-        </div>
-      )}
     </nav>
   );
 }
