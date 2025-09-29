@@ -227,11 +227,10 @@ body,
   margin-top: 1rem;
 }
 
-/* Scroll-hint: pilar */
+/* Pilar under menyn */
 .nav-scroll {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+  margin: 4px;
   height: 28px;
   width: 28px;
   border-radius: 50%;
@@ -242,14 +241,14 @@ body,
   line-height: 28px;
   text-align: center;
   cursor: pointer;
-  z-index: 60;
   opacity: 0.9;
 }
-.nav-scroll.left {
-  left: 6px;
-}
-.nav-scroll.right {
-  right: 6px;
+
+.navbar-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 /* Gradient i kanterna när overflow finns */
