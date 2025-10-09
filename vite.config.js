@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['vite.svg'],
       manifest: {
-        name: 'FrontFood',
-        short_name: 'FrontFood',
+        name: 'Random Recept',
+        short_name: 'Random Recept',
         description: 'Slumpa recept och bläddra kategorier',
         theme_color: '#ffffff',
         background_color: '#ffffff',
